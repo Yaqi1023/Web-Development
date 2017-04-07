@@ -15,6 +15,7 @@ This course is intended to follow IS271: Intro to Programming and Computer Syste
 ### Texts
 ***Required***
 - Hunt, A.; Thomas, D., Pragmatic Programmer, Addison-Wesley Professional, 1999.
+
 ***Optional***
 - Mele, Antonio, Django by Example, Packt Publishing, 2015.
 - Roy Greenfeld, Audrey & Daniel, Two Scoops of Django: Best Practices for Django 1.8, Two Scoops Press, 2015.
