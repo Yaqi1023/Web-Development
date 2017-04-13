@@ -7,18 +7,18 @@ Joshua Gomez
 
 Sr. Software Engineer, Getty Research Institute
 
-joshuagomez@ucla.edu
+[joshuagomez@ucla.edu](mailto:joshuagomez@ucla.edu)
 
 ### Overview
 This course is intended to follow IS271: Intro to Programming and Computer Systems. IS271 teaches students to write basic programs in Python to retrieve, process, transform, and store data. In this course, students will build web-based software systems for use by multiple actors. Topics will focus heavily on the Model-View-Controller design pattern, server-side web development, and best practices for modern software development.
 
 ### Texts
 ***Required***
-- Hunt, A.; Thomas, D., Pragmatic Programmer, Addison-Wesley Professional, 1999.
+- Hunt, A.; Thomas, D., [Pragmatic Programmer](https://pragprog.com/book/tpp/the-pragmatic-programmer), Addison-Wesley Professional, 1999.
 
 ***Optional***
-- Mele, Antonio, Django by Example, Packt Publishing, 2015.
-- Roy Greenfeld, Audrey & Daniel, Two Scoops of Django: Best Practices for Django 1.8, Two Scoops Press, 2015.
+- Mele, Antonio, [Django by Example](https://www.amazon.com/Django-Example-Antonio-Mele/dp/1784391913/), Packt Publishing, 2015.
+- Roy Greenfeld, Audrey & Daniel, [Two Scoops of Django: Best Practices for Django 1.8](https://www.amazon.com/Two-Scoops-Django-Best-Practices/dp/0981467342), Two Scoops Press, 2015.
 
 ### Grading
 - 60% team project
@@ -36,14 +36,14 @@ Topics
 
 Readings
 - Pragmatic Programmer, Ch. 1
-- Wikipedia: Test-Driven Development
-- (optional) Jeff Knupp: OOP in Python
-- Wei Wang: Visual Explanation of Git Commands
+- Wikipedia: [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development)
+- (optional) Jeff Knupp: [OOP in Python](https://jeffknupp.com/blog/2014/06/18/improve-your-python-python-classes-and-object-oriented-programming/)
+- Wei Wang: [Visual Explanation of Git Commands](http://www.wei-wang.com/ExplainGitWithD3/)
 
 Documentation
-- Git
-- Github
-- Python3 venv
+- [Git](https://git-scm.com/documentation)
+- [Github](https://help.github.com/)
+- [Python3 venv](https://docs.python.org/3/library/venv.html)
 
 ---
 
@@ -59,13 +59,13 @@ Topics
 
 Readings
 - Pragmatic Programmer, Ch. 2
-- Wikipedia: Software Architecture, Design Patterns, Model-View-Controller
+- Wikipedia: [Software Architecture](https://en.wikipedia.org/wiki/Software_architecture), [Design Patterns](https://en.wikipedia.org/wiki/Software_design_pattern), [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
 Documentation
-- Django overview
-- Django models
-- Django database migrations
-- ARKs
+- [Django overview](https://docs.djangoproject.com/en/1.10/)
+- [Django models](https://docs.djangoproject.com/en/1.10/topics/db/)
+- [Django database migrations](https://docs.djangoproject.com/en/1.10/topics/migrations/)
+- [ARKs](https://confluence.ucop.edu/display/Curation/ARK)
 
 ---
 
@@ -78,11 +78,11 @@ Readings
 - Pragmatic Programmer, Ch. 3
 
 Documentation
-- Django views
-- Django Templates
-- Django URL dispatcher
-- Twitter Bootstrap
-- Zurb Foundation
+- [Django views](https://docs.djangoproject.com/en/1.10/topics/class-based-views/)
+- [Django Templates](https://docs.djangoproject.com/en/1.10/topics/templates/)
+- [Django URL dispatcher](https://docs.djangoproject.com/en/1.10/topics/http/)
+- [Twitter Bootstrap](http://getbootstrap.com/)
+- [Zurb Foundation](https://foundation.zurb.com)
 
 ---
 
