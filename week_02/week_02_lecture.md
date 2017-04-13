@@ -66,8 +66,41 @@ How to start a project in Django? Look at [part 1 of the tutorial](https://docs.
 - [Model Methods](https://docs.djangoproject.com/en/1.11/topics/db/models/#model-methods)
 - [Making Queries](https://docs.djangoproject.com/en/1.11/topics/db/queries/)
 - [Migrations](https://docs.djangoproject.com/en/1.11/topics/migrations/)
+- [Fixtures](https://docs.djangoproject.com/en/1.11/howto/initial-data/)
 
 #### Example Project - Digital Projects Database
 
 Code repo: ([DPDB](https://github.com/gri-is/dpdb))
 This is a small Django app for the Digital Services Department at the GRI. I built it based on "back of the napkin" requirements, which have subsequently changed. Therefore I will work on rebuilding it throughout the class as an example.
+
+#### Your Mini-project
+
+Over the next few weeks as we cover the Django basics I want you to implement an ARK service.
+
+What is an ARK? [Archival Resource Key](https://confluence.ucop.edu/display/Curation/ARK) is a persistent URL protocol. Libraries and other cultural heritage institutions assign them to their resources. If the service they use to host their resources changes (along with the system URLs) then the ARKs can be pointed at the new systems URLs.
+
+For instance, say we have our digitized museum paintings stored in a vendor service like so:
+
+http://mymuseum.museumservice-1.com/some-unique-ID.html
+
+but we drop that service and go witha fancier new service:
+
+http://mymuseum.museumservice-2.com/some-other-unique-ID.html
+
+Now the old links to our resources no longer work. People may have already published papers with citations with those old URLs!
+
+To avoid that problem we use persistent identifiers. We ***mint*** a new URL for each resource:
+
+http://mymuseum.org/ark:/museum-number/unique-ID
+
+Behind that URL is a resolver system that redirects to that resource's current location. If the current location changes, we simply update the resolver with the new target.
+
+An alternative to ARKs are [Handles](https://www.handle.net/)
+
+ARKs are part of a larger ecosystem of library [microservices](https://wiki.ucop.edu/display/Curation/Microservices)
+
+Some other microservices of note include:
+- [BagIt](https://wiki.ucop.edu/display/Curation/BagIt): for ensuring that digital object are transported (or stored) without corruption.
+- [PairTree](https://wiki.ucop.edu/display/Curation/PairTree): for "fanning out" the storage of lots of objects in a file system (You don't want 10,000 items in one folder).
+
+Your task will be to implement an ARK minter and resolver service.
