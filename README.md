@@ -50,12 +50,12 @@ Documentation
 #### Week 2
 Topics
 - Software Architecture & Design Patterns
-- Model-View-Controller pattern
+    - Model-View-Controller pattern
 - MVC, part 1 - Models
-- Object-Relational Mappers (ORMs)
-- Database migrations
+    - Object-Relational Mappers (ORMs)
+    - Database migrations
 - Persistent Identifiers
-- Handles & Archival Resource Keys (ARKs)
+    - Handles & Archival Resource Keys (ARKs)
 
 Readings
 - Pragmatic Programmer, Ch. 2
@@ -96,7 +96,7 @@ Readings
 - Pragmatic Programmer, Ch. 4
 
 Documentation
-- Django forms
+- [Django forms](https://docs.djangoproject.com/en/1.10/topics/forms/)
 
 ---
 
@@ -108,7 +108,7 @@ Readings
 - Pragmatic Programmer, Ch. 5
 
 Documentation
-- Django authentication
+- [Django authentication](https://docs.djangoproject.com/en/1.10/topics/auth/)
 
 ---
 
@@ -120,11 +120,11 @@ Topics
 
 Readings
 - Pragmatic Programmer, Ch. 6
-- Roy Fielding’s dissertation: Ch. 5: Representaional State Transfer (REST)
-- Mozilla Network: Content Negotiation
+- Roy Fielding’s dissertation: [Ch. 5: Representaional State Transfer (REST)](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
+- Mozilla Network: [Content Negotiation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation)
 
 Documentation
-- Django REST Framework
+- [Django REST Framework](http://www.django-rest-framework.org/)
 
 ---
 
@@ -137,10 +137,10 @@ Readings
 - Pragmatic Programmer, Ch. 7
 
 Documentation
-- Learn X in Y minutes: JavaScript
-- Mozilla JavaScript docs
-- jQuery tutorial
-- TodoMVC (overviews of many JS Frameworks)
+- [Learn X in Y minutes: JavaScript](https://learnxinyminutes.com/docs/javascript/)
+- [Mozilla JavaScript docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [jQuery tutorial](https://learn.jquery.com/)
+- [TodoMVC](http://todomvc.com/) (overviews of many JS Frameworks)
 
 ---
 
@@ -151,10 +151,10 @@ Topics
 
 Readings
 - Pragmatic Programmer, Ch. 8
-- Wikipedia: tf-idf
+- Wikipedia: [tf-idf](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
 
 Documentation
-- ElasticSearch
+- [ElasticSearch](https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html)
 
 ---
 
@@ -164,15 +164,15 @@ Topics
 - End to end testing
 
 Readings
-- Wikipedia: DevOps
-- Wikipedia: Continuous Integration
+- Wikipedia: [DevOps](https://en.wikipedia.org/wiki/DevOps)
+- Wikipedia: [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration)
 
 Documentation
-- Heroku
-- Django Deployment
-- TravisCI
-- Coveralls
-- Selenium
+- [Heroku](https://devcenter.heroku.com/articles/deploying-python)
+- [Django Deployment](https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/modwsgi/)
+- [TravisCI](https://docs.travis-ci.com/)
+- [Coveralls](https://coveralls.zendesk.com/hc/en-us)
+- [Selenium](http://www.seleniumhq.org/docs/)
 
 ---
 
@@ -181,4 +181,4 @@ Topics
 - Advanced Topics
 
 Readings
-- Peter Norvig, Teach Yourself Programming in Ten Years
+- Peter Norvig, [Teach Yourself Programming in Ten Years](http://norvig.com/21-days.html)
