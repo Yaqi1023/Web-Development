@@ -16,6 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from collection import views as collection_views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^books/$', collection_views.books_list, name='books_list'),
+    url(r'^books/(?P<book_id>\d+)$', collection_views.book_details, name='books_list'),
+    url(r'^authors/$', collection_views.authors_list, name='authors_list'),
+    url(r'^authors/(?P<author_id>\d+)$', collection_views.author_details, name='authors_list'),
 ]
