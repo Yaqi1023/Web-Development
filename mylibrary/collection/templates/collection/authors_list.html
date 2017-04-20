@@ -1,0 +1,27 @@
+{% extends 'collection/base.html' %}
+
+{% load staticfiles %}
+
+{% block name %}Books List{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Authors</h1>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Birth year</th>
+    </tr>
+    {% for author in authors %}
+    <tr>
+      <td><a href="/authors/{{author.id}}">{{author.last_name}}</a></td>
+      <td><a href="/authors/{{author.id}}">{{author.first_name}}</a></td>
+      <td>{{author.birth_year}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

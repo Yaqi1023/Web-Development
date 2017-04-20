@@ -18,6 +18,9 @@ class Author(models.Model):
     def __repr__(self):
         return '<Author: {}>'.format(self.sortable_name)
 
+    def __str__(self):
+        return self.sortable_name
+
 
 class Book(models.Model):
 
@@ -32,10 +35,13 @@ class Book(models.Model):
 
     title = models.CharField(max_length=256)
     author = models.ForeignKey(Author, null=True)
-    isbn = models.CharField(max_length=13)
-    pub_year = models.IntegerField(null=True)
+    isbn = models.CharField(max_length=13, null=True, blank=True)
+    pub_year = models.IntegerField(null=True, blank=True)
     rating = models.IntegerField(default=0, choices=RATING_CHOICES)
     notes = models.TextField(null=True, blank=True)
 
     def __repr__(self):
         return '<Book: {}>'.format(self.title)
+
+    def __str__(self):
+        return self.title
