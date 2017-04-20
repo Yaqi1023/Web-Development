@@ -1,1 +1,2 @@
-supyter
+Jupyter
+Django
