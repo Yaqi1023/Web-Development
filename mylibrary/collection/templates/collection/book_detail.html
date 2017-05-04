@@ -1,0 +1,50 @@
+{% extends 'collection/base.html' %}
+
+{% load staticfiles %}
+
+{% block name %}Books List{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>{{book.title}}</h1>
+  </div>
+  <div class="row">
+    
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Details</div>
+        <div class="panel-body">
+          <dl class="dl-horizontal">
+            <dt>Author</dt>
+            <dd><a href="/authors/{{book.author.id}}">{{book.author.full_name}}</a></dd>
+        
+            <dt>Published</dt>
+            <dd>{{book.pub_year}}</dd>
+        
+            <dt>ISBN</dt>
+            <dd>{{book.isbn}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">My Review</div>
+        <div class="panel-body">
+          <dl class="dl-horizontal">
+            
+            <dt>Rating</dt>
+            <dd>{{book.rating}}</dd>
+            
+            <dt>Notes</dt>
+            <dd>{{book.notes}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+{% endblock %}

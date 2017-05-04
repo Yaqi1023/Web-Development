@@ -7,6 +7,9 @@ class Author(models.Model):
     first_name = models.CharField(max_length=64)
     birth_year = models.IntegerField(null=True, blank=True)
 
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
     @property
     def sortable_name(self):
         return '{}, {}'.format(self.last_name, self.first_name)
@@ -39,6 +42,9 @@ class Book(models.Model):
     pub_year = models.IntegerField(null=True, blank=True)
     rating = models.IntegerField(default=0, choices=RATING_CHOICES)
     notes = models.TextField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-rating']
 
     def __repr__(self):
         return '<Book: {}>'.format(self.title)
