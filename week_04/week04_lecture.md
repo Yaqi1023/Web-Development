@@ -550,221 +550,55 @@ But first, let's fix the look of our Book detail page...
 ```html
 <!-- book_detail.html -->
 
-{% extends 'core/base.html' %}
+{% extends 'collection/base.html' %}
 
-{% load staticfiles core_extras %}
+{% load staticfiles %}
 
-{% block name %}Order {{order.order_id}}{% endblock %}
+{% block name %}Books List{% endblock %}
 
 {% block content %}
-      <div class="container">
-
-        {% if updated %}
-          <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            Order Updated Successfully
-          </div>
-        {% endif %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>{{book.title}}</h1>
+  </div>
+  <div class="row">
+    
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Details</div>
+        <div class="panel-body">
+          <dl class="dl-horizontal">
+            <dt>Author</dt>
+            <dd><a href="/authors/{{book.author.id}}">{{book.author.full_name}}</a></dd>
         
-        <div class="row">
-          <br>
-          <div class="jumbotron">
-            <h1>Order {{order.order_id}} <small>{% if order.closed %}(closed){% else %}(open){% endif %}</small></h1>
-            <p>
-              Asset Request #: <b>{{order.ar_num}}</b><br>
-              Assigned to: <b>{{order.assigned_to.get_full_name}}</b>
-            </p>
-          </div>
+            <dt>Published</dt>
+            <dd>{{book.pub_year}}</dd>
+        
+            <dt>ISBN</dt>
+            <dd>{{book.isbn}}</dd>
+          </dl>
         </div>
-
-        <hr>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">Dates</div>
-              <div class="panel-body">
-                <dl class="dl-horizontal">
-                  <dt>Date Requested</dt>
-                  <dd>{{order.date_requested}}</dd>
-
-                  <dt>Date Due</dt>
-                  <dd>
-                    {% if order.closed %}{{order.date_due}}
-                    {% else %}
-                    <span class="text-{{order.date_due|deadline_warning}}">
-                      {{order.date_due}}
-                    </span>
-                    {% endif %}
-                  </dd>
-
-                  <dt>Date Assigned</dt>
-                  <dd>
-                    {% if order.date_assigned %}
-                      {{order.date_assigned}}
-                    {% else %}
-                      <span class="text-warning">Not assigned</span>
-                    {% endif %}
-                  </dd>
-                  
-                  <dt>Date Completed</dt>
-                  <dd>
-                    {% if order.closed %}
-                      {{order.date_done}}
-                    {% else %}
-                    <span class="text-{{order.date_due|deadline_warning}}">
-                      Not Completed
-                    </span>
-                    {% endif %}
-                  </dd>
-
-                  <dt>Rush Order?</dt>      
-                  <dd><span {% if order.rush and not order.completed %}class="text-info"{% endif %}>{{order.rush|yesno:"Yes,No"}}</span></dd>
-                </dl>
-              </div>
-            </div>
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Content</h3>
-              </div>
-              <div class="panel-body">
-                <dl class="dl-horizontal">
-                  <dt>Accession Number</dt>
-                  <dd>{{order.accession_num}}</dd>
-
-                  <dt>Material Source</dt>
-                  <dd>{{order.get_material_source_display}}</dd>
-
-                  <dt>Image Count</dt>
-                  <dd>{{order.img_count}}</dd>
-
-                  <dt>Box Count</dt>
-                  <dd>{{order.box_count}}</dd>
-
-                  <dt>Notes</dt>
-                  <dd>{{order.notes}}</dd>
-                </dl>
-              </div>
-            </div>
-
-          </div><!-- col -->
-
-          <div class="col-md-6">
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">For</h3>
-              </div>
-              <div class="panel-body">
-                <dl class="dl-horizontal">
-                  <dt>Requested By</dt>
-                  <dd>{{order.requestor}}</dd>
-
-                  <dt>Department</dt>
-                  <dd>{{order.requestor_dept}}</dd>
-                </dl>
-              </div>
-            </div>
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Output</h3>
-              </div>
-              <div class="panel-body">
-                <dl class="dl-horizontal">
-                  <dt>TMS Count</dt>
-                  <dd>{{order.tms_count}}</dd>
-
-                  <dt>OTMM Count</dt>
-                  <dd>{{order.otmm_count}}</dd>
-
-                  <dt>TIFF Count</dt>
-                  <dd>{{order.tiff_count}}</dd>
-
-                  <dt>JPEG Count</dt>
-                  <dd>{{order.jpeg_count}}</dd>
-
-                  <dt>Match Print Count</dt>
-                  <dd>{{order.match_print_count}}</dd>
-
-                  <dt>Facsimile Count</dt>
-                  <dd>{{order.facsimile_count}}</dd>
-
-                  <dt>Exhibition Image Count</dt>
-                  <dd>{{order.exhibition_img_count}}</dd>
-
-                  <dt>Exhibition Given Count</dt>
-                  <dd>{{order.exhibition_given_count}}</dd>
-
-                  <dt>Exhibition Used Count</dt>
-                  <dd>{{order.exhibition_used_count}}</dd>
-
-                  <dt>Photo Request Total</dt>
-                  <dd>{{order.photo_req_total}}</dd>
-
-                </dl>
-              </div>
-            </div>
-
-          </div><!-- col -->
-          
-        </div><!-- row -->
-
-        <hr>
-
-        {% if user.is_authenticated %}
-          <div class="row">
-            {% include "core/order_form_modal.html" %}
-            {% include "core/self_assign_form_modal.html" %}
-
-            {% if perms.core.add_order %}  
-              {% include "core/order_delete_modal.html" %}
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#order-form-modal">Edit</button>
-              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#order-delete-modal">Delete</button>
-            
-            {% else %}
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#order-form-modal">Update</button>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#self-assign-form-modal">Self Assign</button>
-            {% endif %}
-          </div>
-        {% endif %}
       </div>
-      <br>
-      <br>
-{% endblock %}
+    </div>
 
-{% block script_extra %}
-  {% if post_failed %}
-    <script>
-      $('#order-form-modal').modal('show');
-    </script>
-  {% endif %}
-
-  <script>
-    $('#delete').submit(function(e) {
-      e.preventDefault();
-
-      $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-          if(!this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
-          }
-        }
-      });
-
-      $.ajax({
-        type: 'DELETE',
-        url: '{{order.order_id}}',
-        success: function() {
-          window.location.href = '/dpdb/orders/'
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          window.location.href = '/dpdb/login/'
-        }
-      });
-    });
-  </script>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">My Review</div>
+        <div class="panel-body">
+          <dl class="dl-horizontal">
+            
+            <dt>Rating</dt>
+            <dd>{{book.rating}}</dd>
+            
+            <dt>Notes</dt>
+            <dd>{{book.notes}}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
 {% endblock %}
 ```
 
