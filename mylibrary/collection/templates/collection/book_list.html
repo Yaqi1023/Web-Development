@@ -10,11 +10,13 @@
     <h1>My Books</h1>
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#book-form-modal">New Book</button>
+    {% if perms.collection.can_add_book %}
+      <div class="col-md-12">
+        <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#book-form-modal">New Book</button>
 
-      {% include "collection/book_form_modal.html" %}
-    </div>
+        {% include "collection/book_form_modal.html" %}
+      </div>
+    {% endif %}
   </div>
   <div class="row">
     <br>

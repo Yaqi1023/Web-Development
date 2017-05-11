@@ -1,6 +1,9 @@
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
  
 from collection.models import Book, Author
 from collection.forms import AuthorForm, BookForm
@@ -15,6 +18,7 @@ class BookList(FormMixin, ListView):
         context['form'] = self.get_form()
         return context
 
+    @method_decorator(permission_required('collection.can_add_book'))
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
@@ -36,10 +40,10 @@ class AuthorList(FormMixin, ListView):
         context['form'] = self.get_form()
         return context
 
+    @method_decorator(permission_required, 'collection.can_add_author')
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
-
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
