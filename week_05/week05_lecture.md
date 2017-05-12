@@ -595,6 +595,7 @@ Once you have done that, update the views to restrict access to the new books an
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
  
@@ -611,7 +612,7 @@ class BookList(FormMixin, ListView):
         context['form'] = self.get_form()
         return context
 
-    @method_decorator(permission_required, 'collection.can_add_book')
+    @method_decorator(permission_required('collection.can_add_book'))
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
@@ -633,11 +634,10 @@ class AuthorList(FormMixin, ListView):
         context['form'] = self.get_form()
         return context
 
-    @method_decorator(permission_required, 'collection.can_add_author')
+    @method_decorator(permission_required('collection.can_add_author'))
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
-
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -666,6 +666,7 @@ class AuthorDetail(DetailView):
         context = super(AuthorDetail, self).get_context_data(**kwargs)
         context['books'] = self.object.book_set.all()
         return context
+
 ```
 
 Try creating a new book with your superuser. It should still work fine.
