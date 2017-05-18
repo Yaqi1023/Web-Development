@@ -4,9 +4,21 @@ from django.views.generic.edit import FormMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.reverse import reverse as api_reverse
+from rest_framework import status
+from rest_framework import generics
+from rest_framework import permissions
+from rest_framework import viewsets
  
 from collection.models import Book, Author
 from collection.forms import AuthorForm, BookForm
+from collection.serializers import AuthorSerializer, BookSerializer
 
 
 class BookList(FormMixin, ListView):
@@ -60,7 +72,6 @@ class AuthorList(FormMixin, ListView):
         return reverse('author_list')
 
 
-
 class BookDetail(DetailView):
     model = Book
  
@@ -72,3 +83,15 @@ class AuthorDetail(DetailView):
         context = super(AuthorDetail, self).get_context_data(**kwargs)
         context['books'] = self.object.book_set.all()
         return context
+
+
+class APIAuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+class APIBookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

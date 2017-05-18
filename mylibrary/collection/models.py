@@ -37,7 +37,7 @@ class Book(models.Model):
     )
 
     title = models.CharField(max_length=256)
-    author = models.ForeignKey(Author, null=True)
+    author = models.ForeignKey(Author, null=True, related_name='books')
     isbn = models.CharField(max_length=13, null=True, blank=True)
     pub_year = models.IntegerField(null=True, blank=True)
     rating = models.IntegerField(default=0, choices=RATING_CHOICES)
