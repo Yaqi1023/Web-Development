@@ -4,15 +4,21 @@ from django.views.generic.edit import FormMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
-
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
+
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.reverse import reverse as api_reverse
+from rest_framework import status
+from rest_framework import generics
+from rest_framework import permissions
+from rest_framework import viewsets
  
 from collection.models import Book, Author
 from collection.forms import AuthorForm, BookForm
-from collection.serializers import AuthorSerializer
+from collection.serializers import AuthorSerializer, BookSerializer
 
 
 class BookList(FormMixin, ListView):
@@ -66,7 +72,6 @@ class AuthorList(FormMixin, ListView):
         return reverse('author_list')
 
 
-
 class BookDetail(DetailView):
     model = Book
  
@@ -80,41 +85,13 @@ class AuthorDetail(DetailView):
         return context
 
 
-@csrf_exempt
-def author_list(request):
-    if request.method == 'GET':
-        authors = Author.objects.all()
-        serializer = AuthorSerializer(authors, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = AuthorSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+class APIAuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-@csrf_exempt
-def author_detail(request, pk):
-    try:
-        author = Author.objects.get(pk=pk)
-    except Author.DoesNotExist:
-        return HttpResponse(status=404)
-
-    if request.method == 'GET':
-        serializer = AuthorSerializer(author)
-        return JsonResponse(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = AuthorSerializer(author, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-
-    elif request.method == 'DELETE':
-        author.delete()
-        return HttpResponse(status=204)
+class APIBookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
