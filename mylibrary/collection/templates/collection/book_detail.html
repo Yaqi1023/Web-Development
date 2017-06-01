@@ -46,5 +46,40 @@
     </div>
     
   </div>
+  <div class="row">
+  {% if perms.collection.can_delete_book %}
+    {% include "collection/book-delete-modal.html" %}
+      <div class="col-md-12">
+        <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal" data-target="#book-delete-modal">Delete Book</button>
+      </div>
+  {% endif %}
+  </div>
 </div>
+{% endblock %}
+
+{% block script_extra %}
+<script>
+    $('#delete').submit(function(e) {
+      e.preventDefault();
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if(!this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+          }
+        }
+      });
+      $.ajax({
+        type: 'DELETE',
+        url: '/books/{{book.id}}',
+        success: function() {
+          window.location.href = '/books/'
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log(errorThrown);
+          console.log(textStatus);
+          window.location.href = '/login/'
+        }
+      });
+    });
+  </script>
 {% endblock %}

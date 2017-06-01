@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Basic Page for Testing</title>
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="div1">
+            <p class="first-sentences">Here is a paragraph</p>
+            <p class="second-sentences">Here is a second paragraph</p>
+        </div>
+        <br/>
+        <div id="div2">
+            <p class="first-sentences">This paragraph is in a separate div element</p>
+            <p class="second-sentences">This on is too</p>
+        </div>
+        <br/>
+        <div >
+            <button id="toggler" href="#">Toggle!</button>
+        </div>
+        <div>
+            <input type="text">
+            <button id="fetcher" href="#">Fetch Book</button>
+            <div id="book-data"></div>
+        </div>
+    </body>
+    <script>
+        $('#fetcher').on('click', function(event) {
+            $.ajax({
+                accepts: 'application/json',
+                url: 'http://127.0.0.1:8000/api/books',
+                success: function(result) {
+                    console.log(result);
+                    $('#book-data').html(result);
+                },
+                error: function(jqxhr, textStatus, errorThrown) {
+                    console.log('ERROR: ' + textStatus + '\n' + errorThrown);
+                }
+            });
+        });
+    </script>
+</html>

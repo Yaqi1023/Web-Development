@@ -9,8 +9,14 @@
   <div class="jumbotron">
     <h1>My Books</h1>
   </div>
+  {% if deleted_book %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      Book {{deleted_book}} deleted
+    </div>
+  {% endif %}
   <div class="row">
-    {% if perms.collection.can_add_book %}
+    {% if perms.collection.add_book %}
       <div class="col-md-12">
         <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#book-form-modal">New Book</button>
 

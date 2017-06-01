@@ -28,9 +28,13 @@ class BookList(FormMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(BookList, self).get_context_data(**kwargs)
         context['form'] = self.get_form()
+        deleted_book = self.request.session.get('deleted_book', False)
+        if deleted_book:
+            context['deleted_book'] = deleted_book
+            del self.request.session['deleted_book']
         return context
 
-    @method_decorator(permission_required('collection.can_add_book'))
+    @method_decorator(permission_required('collection.add_book'))
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
@@ -52,7 +56,7 @@ class AuthorList(FormMixin, ListView):
         context['form'] = self.get_form()
         return context
 
-    @method_decorator(permission_required, 'collection.can_add_author')
+    @method_decorator(permission_required('collection.add_author'))
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
@@ -74,6 +78,13 @@ class AuthorList(FormMixin, ListView):
 
 class BookDetail(DetailView):
     model = Book
+
+    @method_decorator(permission_required('collection.delete_book'))
+    def delete(self, request, *args, **kwargs):
+        book = self.get_object()
+        request.session['deleted_book'] = '"{}" ({})'.format(book.title, book.id)
+        book.delete()
+        return JsonResponse({})
  
 
 class AuthorDetail(DetailView):
